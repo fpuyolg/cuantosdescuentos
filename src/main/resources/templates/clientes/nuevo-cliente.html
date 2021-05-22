@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Nuevo Cliente</title>
+</head>
+
+<body>
+	<h1>Nuevo Cliente</h1>
+	<br>					<!-- Campos: DNI, Nombre, Teléfono, Email -->
+	<form action="#" th:action="@{/clientes/grabarCliente}"
+					 th:object="${nCliente}" method="POST">
+					 
+		<input type="hidden" th:field="*{id_cliente}"/>		  <!-- Añadimos un campo oculto con la id del empleado para las actualizaciones -->
+		<input type="text" th:field="*{dni}" placeholder="DNI"><br>
+		<input type="text" th:field="*{nombre}" placeholder="Nombre"><br>
+		<input type="text" th:field="*{telefono}" placeholder="Teléfono"><br>
+		<input type="text" th:field="*{email}" placeholder="Email"><br><br>
+		
+		<button type="submit">Guardar</button>
+	</form>
+</body>
+</html>

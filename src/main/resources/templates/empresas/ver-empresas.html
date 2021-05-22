@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Listado de clientes</title>
+</head>
+<body>
+	<h1>Listado de empresas</h1>
+	<br>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>ID-Empresa</th>
+				<th>CIF</th>
+				<th>Nombre</th>
+				<th>Tel&eacute;fono</th>
+				<th>Email</th>
+				<th>Direcci&oacute;n</th>
+				<th>C.P.</th>
+				<th>Localidad</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempEmpresa : ${listaEmpresas}">
+			  	<td th:text="${tempEmpresa.id_empresa}" />
+				<td th:text="${tempEmpresa.cif}" />
+				<td th:text="${tempEmpresa.nombre}" />
+				<td th:text="${tempEmpresa.telefono}" />
+				<td th:text="${tempEmpresa.email}" />
+				<td th:text="${tempEmpresa.direccion}" />
+				<td th:text="${tempEmpresa.cp}" />
+				<td th:text="${tempEmpresa.localidad}" />
+			</tr>
+		</tbody>
+	</table>	
+	<br><br>
+	<a th:href="@{/}"> Principal </a>
+</body>
+</html>
