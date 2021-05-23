@@ -1,9 +1,13 @@
 package com.portfolio.cuantosdescuentos.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +36,7 @@ public class ClientesController {
 		theModel.addAttribute("lista", listaClientes);
 		return "clientes/ver-clientes";
 	}
-	
+
 	@GetMapping("/clientes/nuevoCliente")
 	public String nuevoCliente(Model theModel) {
 		Cliente nCliente = new Cliente();
@@ -40,8 +44,17 @@ public class ClientesController {
 		return "clientes/nuevo-cliente";
 	}
 	
+//	@PostMapping("/clientes/grabarCliente")
+//	public String grabarCliente(@ModelAttribute("nCliente") Cliente nCliente) {
+//		clienteService.save(nCliente);
+//		return "redirect:/clientes/verClientes";
+//	}
+	
 	@PostMapping("/clientes/grabarCliente")
-	public String grabarCliente(@ModelAttribute("nCliente") Cliente nCliente) {
+	public String grabarCliente(@Valid @ModelAttribute("nCliente") Cliente nCliente, BindingResult theBindingResult) {
+		if (theBindingResult.hasErrors()) {
+			return("/clientes/nuevo-cliente");
+		}
 		clienteService.save(nCliente);
 		return "redirect:/clientes/verClientes";
 	}

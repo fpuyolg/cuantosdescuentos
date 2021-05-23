@@ -12,10 +12,18 @@
 					 th:object="${nCliente}" method="POST">
 					 
 		<input type="hidden" th:field="*{id_cliente}"/>		  <!-- Añadimos un campo oculto con la id del empleado para las actualizaciones -->
-		<input type="text" th:field="*{dni}" placeholder="DNI"><br>
-		<input type="text" th:field="*{nombre}" placeholder="Nombre"><br>
-		<input type="text" th:field="*{telefono}" placeholder="Teléfono"><br>
-		<input type="text" th:field="*{email}" placeholder="Email"><br><br>
+		
+		<input type="text" th:field="*{dni}" placeholder="DNI">
+			<small th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small><br>
+
+		<input type="text" th:field="*{nombre}" placeholder="Nombre">
+			<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
+			
+		<input type="text" th:field="*{telefono}" placeholder="Teléfono">
+			<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
+			
+		<input type="text" th:field="*{email}" placeholder="Email"><br>
+			<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
 		
 		<button type="submit">Guardar</button>
 	</form>

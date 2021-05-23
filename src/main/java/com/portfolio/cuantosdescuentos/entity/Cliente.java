@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
+//import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="clientes")
@@ -16,15 +18,22 @@ public class Cliente {
 	@Column(name="id_cliente")
 	private int id_cliente;
 	
+	@NotEmpty(message="Campo DNI obligatorio")
+	@Pattern(regexp="^[0-9]{8}[A-Z]{1}", message="Si el primer dígito es 0 debe ponerlo. La letra debe ser mayúscula")
 	@Column(name="dni")
 	private String dni;
 	
+	@NotEmpty(message="Campo Nombre obligatorio")
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotEmpty(message="Campo teléfono obligatorio")
+	@Pattern(regexp="^[0-9]{9}", message="Indique 9 dígitos")
 	@Column(name="telefono")
 	private String telefono;
 	
+	@Email(message="Email incorrecto")
+	@Pattern(regexp=".+@.+\\..+", message="Email incorrecto")
 	@Column(name="email")
 	private String email;
 	
