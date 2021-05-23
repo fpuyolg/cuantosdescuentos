@@ -25,7 +25,7 @@ public class ClientesController {
 		return "index";
 	}
 	
-	@GetMapping("/clientes/verTodos")
+	@GetMapping("/clientes/verClientes")
 	public String verClientes(Model theModel) {
 		List<Cliente>listaClientes = clienteService.findAll();
 
@@ -43,7 +43,7 @@ public class ClientesController {
 	@PostMapping("/clientes/grabarCliente")
 	public String grabarCliente(@ModelAttribute("nCliente") Cliente nCliente) {
 		clienteService.save(nCliente);
-		return "redirect:/clientes/verTodos";
+		return "redirect:/clientes/verClientes";
 	}
 }
 

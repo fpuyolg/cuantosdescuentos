@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Nueva Empresa</title>
+</head>
+<body>
+	<h1>Nueva Empresa</h1>
+	<br>
+	<form action="#" th:action="@{/empresas/grabarEmpresa}"
+					 th:object="${nEmpresa}" method="POST">
+
+	 	<input type="hidden" th:field="*{id_empresa}"/><br>
+		<input type="text" th:field="*{cif}" placeholder="CIF"/><br>
+		<input type="text" th:field="*{nombre}" placeholder="Nombre Empresa"/><br>
+		<input type="text" th:field="*{telefono}" placeholder="Telefono"/><br>
+		<input type="text" th:field="*{email}" placeholder="Email"/><br>
+		<input type="text" th:field="*{direccion}" placeholder="Dirección"/><br>
+		<input type="text" th:field="*{cp}" placeholder="C.P."/><br>
+		<input type="text" th:field="*{localidad}" placeholder="Localidad"/><br><br>
+		<button type="submit">Grabar</button>
+	</form>
+</body>
+</html>

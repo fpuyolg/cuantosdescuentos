@@ -24,4 +24,10 @@ public class EmpresaServiceImpl implements EmpresaService {
 		return listaEmpresas;
 	}
 
+	@Override
+	public void save(Empresa nEmpresa) {
+		empresaRepository.save(nEmpresa);
+		
+	}
+
 }
