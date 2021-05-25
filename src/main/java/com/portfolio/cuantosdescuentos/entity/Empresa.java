@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="empresas")
@@ -16,24 +19,35 @@ public class Empresa {
 	@Column(name="id_empresa")
 	private int id_empresa;
 	
+	@NotEmpty(message="Campo CIF obligatorio")
+	@Pattern(regexp="^[A-Z]{1}[0-9]{8}", message="Debe indicar una letra mayúscula y 8 dígitos")
 	@Column(name="cif")
 	private String cif;
 	
+	@NotEmpty(message="Campo Nombre obligatorio")
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotEmpty(message="Campo teléfono obligatorio")
+	@Pattern(regexp="^[0-9]{9}", message="Indique 9 dígitos")
 	@Column(name="telefono")
 	private String telefono;
 	
+	@Email(message="Email incorrecto")
+	@Pattern(regexp=".+@.+\\..+", message="Email incorrecto")
 	@Column(name="email")
 	private String email;
 	
+	@NotEmpty(message="Campo Dirección obligatorio")
 	@Column(name="direccion")
 	private String direccion;
 	
+	@NotEmpty(message="Campo Código Postal obligatorio")
+	@Pattern(regexp="^[0-9]{5}", message="Indique 5 dígitos")
 	@Column(name="cp")
 	private String cp;
 	
+	@NotEmpty(message="Campo Localidad obligatorio")
 	@Column(name="localidad")
 	private String localidad;
 	

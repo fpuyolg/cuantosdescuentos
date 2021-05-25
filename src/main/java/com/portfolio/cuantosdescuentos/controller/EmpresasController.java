@@ -1,9 +1,13 @@
 package com.portfolio.cuantosdescuentos.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +41,10 @@ public class EmpresasController {
 	}
 	
 	@PostMapping("/empresas/grabarEmpresa")
-	public String grabarEmpresa(@ModelAttribute("nEmpresa") Empresa nEmpresa) {
+	public String grabarEmpresa(@Valid @ModelAttribute("nEmpresa") Empresa nEmpresa, BindingResult theBindingResult) {
+		if (theBindingResult.hasErrors()) {
+			return("/empresas/nueva-empresa");
+		}
 		empresaService.save(nEmpresa);
 		return "redirect:/empresas/verEmpresas";
 	}
