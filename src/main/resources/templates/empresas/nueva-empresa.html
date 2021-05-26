@@ -7,31 +7,40 @@
 <body>
 	<h1>Nueva Empresa</h1>
 	<br>
-	<form action="#" th:action="@{/empresas/grabarEmpresa}"
-					 th:object="${nEmpresa}" method="POST">
+	<form action="#" th:action="@{/empresas/grabarEmpresa}" method="POST">
 
-	 	<input type="hidden" th:field="*{id_empresa}"/><br>
-	 	
-		<input type="text" th:field="*{cif}" placeholder="CIF"/>
-			<small th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"></small><br>
-		
-		<input type="text" th:field="*{nombre}" placeholder="Nombre Empresa"/>
-			<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
-		
-		<input type="text" th:field="*{telefono}" placeholder="Telefono"/>
-			<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
-		
-		<input type="text" th:field="*{email}" placeholder="Email"/>
-			<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
-		
-		<input type="text" th:field="*{direccion}" placeholder="Dirección"/>
-			<small th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small><br>
-		
-		<input type="text" th:field="*{cp}" placeholder="C.P."/>
-			<small th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></small><br>
-		
-		<input type="text" th:field="*{localidad}" placeholder="Localidad"/>
-			<small th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}"></small><br><br>
+		<div th:object="${nUsuario}">
+			<input type="text" th:field="*{nombre_usuario}" placeholder="Nombre de Usuario">
+				<small th:if="${#fields.hasErrors('nombre_usuario')}" th:errors="*{nombre_usuario}"></small><br>
+			
+			<input type="text" th:field="*{clave}" placeholder="Clave">
+				<small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small><br>
+		</div>
+
+		<div th:object="${nEmpresa}">
+			<input type="hidden" th:field="*{id_empresa}"/><br>
+			
+			<input type="text" th:field="*{cif}" placeholder="CIF"/>
+				<small th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"></small><br>
+			
+			<input type="text" th:field="*{nombre}" placeholder="Nombre Empresa"/>
+				<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
+			
+			<input type="text" th:field="*{telefono}" placeholder="Telefono"/>
+				<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
+			
+			<input type="text" th:field="*{email}" placeholder="Email"/>
+				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+			
+			<input type="text" th:field="*{direccion}" placeholder="Dirección"/>
+				<small th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small><br>
+			
+			<input type="text" th:field="*{cp}" placeholder="C.P."/>
+				<small th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></small><br>
+			
+			<input type="text" th:field="*{localidad}" placeholder="Localidad"/>
+				<small th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}"></small><br><br>
+		</div>
 		
 		<button type="submit">Grabar</button>
 	</form>

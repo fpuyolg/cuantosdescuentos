@@ -69,7 +69,7 @@ public class ClientesController {
 		clienteService.save(nCliente);
 		
 		nUsuario.setId_usuario(nCliente.getDni());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan
-		nUsuario.setRol("CLIENTE");						// el id_usuario que será el DNI del cliente y el rol que será "CLIENTE"
+		nUsuario.setRol("CLIENTE");						// al id_usuario que será el DNI del cliente y el rol que será "CLIENTE"
 		usuarioService.save(nUsuario);
 		
 		return "redirect:/clientes/verClientes";
