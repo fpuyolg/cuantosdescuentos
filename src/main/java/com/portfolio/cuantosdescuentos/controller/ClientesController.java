@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.portfolio.cuantosdescuentos.entity.Cliente;
+import com.portfolio.cuantosdescuentos.entity.Usuario;
 import com.portfolio.cuantosdescuentos.service.ClienteService;
+import com.portfolio.cuantosdescuentos.service.UsuarioService;
 
 @Controller
 public class ClientesController {
@@ -20,8 +22,12 @@ public class ClientesController {
 	@Autowired
 	private ClienteService clienteService;
 	
-	public ClientesController(ClienteService thisClienteService) {
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	public ClientesController(ClienteService thisClienteService, UsuarioService thisUsuarioService) {
 		clienteService=thisClienteService;
+		usuarioService=thisUsuarioService;
 	}
 	
 	@GetMapping("/")
@@ -37,25 +43,35 @@ public class ClientesController {
 		return "clientes/ver-clientes";
 	}
 
+	// ALTA DE CLIENTE. SE GRABAN DATOS EN TABLA CLIENTES Y TABLA USUARIOS
+	
 	@GetMapping("/clientes/nuevoCliente")
-	public String nuevoCliente(Model theModel) {
+	public String nuevoCliente(Model modeloCliente, Model modeloUsuario) {	// Añadir un segundo modelo para guardar datos en la tabla usuario
+		
 		Cliente nCliente = new Cliente();
-		theModel.addAttribute("nCliente", nCliente);	// Para nuevo cliente pasamos un modelo con un atributo tipo Cliente preparado para recibir los datos
+		modeloCliente.addAttribute("nCliente", nCliente);	// Para nuevo cliente pasamos un modelo con un atributo tipo Cliente preparado para recibir los datos
+		
+		Usuario nUsuario = new Usuario();
+		modeloUsuario.addAttribute("nUsuario", nUsuario);
+		
 		return "clientes/nuevo-cliente";
 	}
+
 	
-//	@PostMapping("/clientes/grabarCliente")
-//	public String grabarCliente(@ModelAttribute("nCliente") Cliente nCliente) {
-//		clienteService.save(nCliente);
-//		return "redirect:/clientes/verClientes";
-//	}
-	
-	@PostMapping("/clientes/grabarCliente")
-	public String grabarCliente(@Valid @ModelAttribute("nCliente") Cliente nCliente, BindingResult theBindingResult) {
-		if (theBindingResult.hasErrors()) {
+	@PostMapping("/clientes/grabarCliente")		// Añadir un segundo ModelAttribute para grabar los datos de la tabla usuario
+	public String grabarCliente(@Valid @ModelAttribute("nCliente") Cliente nCliente, BindingResult clienteBR, 
+								@Valid @ModelAttribute("nUsuario") Usuario nUsuario, BindingResult usuarioBR) {
+		
+		if (clienteBR.hasErrors() || usuarioBR.hasErrors()) {
 			return("/clientes/nuevo-cliente");
 		}
+		
 		clienteService.save(nCliente);
+		
+		nUsuario.setId_usuario(nCliente.getDni());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan
+		nUsuario.setRol("CLIENTE");						// el id_usuario que será el DNI del cliente y el rol que será "CLIENTE"
+		usuarioService.save(nUsuario);
+		
 		return "redirect:/clientes/verClientes";
 	}
 }

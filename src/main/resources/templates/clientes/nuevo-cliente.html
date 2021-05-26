@@ -8,22 +8,32 @@
 <body>
 	<h1>Nuevo Cliente</h1>
 	<br>					
-	<form action="#" th:action="@{/clientes/grabarCliente}"
-					 th:object="${nCliente}" method="POST">
-					 
-		<input type="hidden" th:field="*{id_cliente}"/>		  <!-- Añadimos un campo oculto con la id del empleado para las actualizaciones -->
+	<form action="#" th:action="@{/clientes/grabarCliente}" method="POST">	  
 		
-		<input type="text" th:field="*{dni}" placeholder="DNI">
-			<small th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small><br>
-
-		<input type="text" th:field="*{nombre}" placeholder="Nombre">
-			<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
+		<div th:object="${nUsuario}">
+			<input type="text" th:field="*{nombre_usuario}" placeholder="Nombre de Usuario">
+				<small th:if="${#fields.hasErrors('nombre_usuario')}" th:errors="*{nombre_usuario}"></small><br>
 			
-		<input type="text" th:field="*{telefono}" placeholder="Teléfono">
-			<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
-			
-		<input type="text" th:field="*{email}" placeholder="Email"><br>
-			<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+			<input type="text" th:field="*{clave}" placeholder="Clave">
+				<small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small><br>
+		</div>
+		
+		<div th:object="${nCliente}">
+		
+			<input type="hidden" th:field="*{id_cliente}"/>		<!-- Añadimos un campo oculto con la id del empleado para las actualizaciones -->
+		
+			<input type="text" th:field="*{dni}" placeholder="DNI">
+				<small th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small><br>
+	
+			<input type="text" th:field="*{nombre}" placeholder="Nombre">
+				<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
+				
+			<input type="text" th:field="*{telefono}" placeholder="Teléfono">
+				<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
+				
+			<input type="text" th:field="*{email}" placeholder="Email"><br>
+				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+		</div>
 		
 		<button type="submit">Guardar</button>
 	</form>
