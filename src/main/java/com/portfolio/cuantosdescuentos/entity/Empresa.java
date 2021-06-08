@@ -70,6 +70,7 @@ public class Empresa {
 
 
 	// Métodos Getter y Setter
+	
 	public int getId_empresa() {
 		return id_empresa;
 	}

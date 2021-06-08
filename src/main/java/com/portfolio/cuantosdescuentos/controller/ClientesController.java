@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ public class ClientesController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;	// Para encriptar la clave de usuario antes de grabarla en la base de datos
 	
 	public ClientesController(ClienteService thisClienteService, UsuarioService thisUsuarioService) {
 		clienteService=thisClienteService;
@@ -68,8 +72,10 @@ public class ClientesController {
 		
 		clienteService.save(nCliente);
 		
-		nUsuario.setId_usuario(nCliente.getDni());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan
-		nUsuario.setRol("CLIENTE");						// al id_usuario que será el DNI del cliente y el rol que será "CLIENTE"
+		nUsuario.setId_usuario(nCliente.getDni());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=DNI y rol "CLIENTE"
+		nUsuario.setRol("CLIENTE");
+		nUsuario.setClave(passwordEncoder.encode(nUsuario.getClave()));		// Encriptamos la clave con PasswordEncoder
+		
 		usuarioService.save(nUsuario);
 		
 		return "redirect:/clientes/verClientes";

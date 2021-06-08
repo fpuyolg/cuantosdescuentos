@@ -23,7 +23,7 @@ public class Usuario {
 		private String nombre_usuario;
 		
 		@Column(name="clave")
-		@Size(min=6, max=15, message="El usuario debe tener entre 6 y 15 caracteres")
+		//@Size(min=6, max=15, message="La clave debe tener entre 6 y 15 caracteres")		Por la encryptación pasa a 60 caracteres y da error. Revisar
 		@NotEmpty(message="Clave obligatoria")
 		private String clave;
 		

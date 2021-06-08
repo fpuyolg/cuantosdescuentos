@@ -3,6 +3,7 @@ package com.portfolio.cuantosdescuentos.controller;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,10 @@ public class EmpresasController {
 	
 	@Autowired
 	private EmpresaService empresaService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	private UsuarioService usuarioService;
 	
 	public EmpresasController(EmpresaService thisEmpresaService, UsuarioService thisUsuarioService) {
@@ -34,21 +39,6 @@ public class EmpresasController {
 		return "empresas/ver-empresas";
 	}
 	
-/*	@GetMapping("/empresas/nuevaEmpresa")
-	public String nuevaEmpresa(Model theModel) {
-		Empresa nEmpresa = new Empresa();					// Creamos un modelo y le asignamos un objeto Empresa al que se vincularán
-		theModel.addAttribute("nEmpresa", nEmpresa);		// los campos del formulario de alta de nueva empresa
-		return "empresas/nueva-empresa";
-	}
-	
-	@PostMapping("/empresas/grabarEmpresa")
-	public String grabarEmpresa(@Valid @ModelAttribute("nEmpresa") Empresa nEmpresa, BindingResult theBindingResult) {
-		if (theBindingResult.hasErrors()) {
-			return("/empresas/nueva-empresa");
-		}
-		empresaService.save(nEmpresa);
-		return "redirect:/empresas/verEmpresas";
-	}   */
 	
 	@GetMapping("/empresas/nuevaEmpresa")
 	public String nuevaEmpresa(Model modeloEmpresa, Model modeloUsuario) {
@@ -72,9 +62,11 @@ public class EmpresasController {
 		
 		empresaService.save(nEmpresa);
 		
-		nUsuario.setId_usuario(nEmpresa.getCif());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan
-		nUsuario.setRol("EMPRESA");						// al id_usuario que será el CIF de la empresa y el rol que será "EMPRESA"
-		usuarioService.save(nUsuario);
+		nUsuario.setId_usuario(nEmpresa.getCif());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=CIF y Rol="EMPRESA")
+		nUsuario.setRol("EMPRESA");
+		nUsuario.setClave(passwordEncoder.encode(nUsuario.getClave()));
+		
+		usuarioService.save(nUsuario);		
 		
 		return "redirect:/empresas/verEmpresas";
 	}
