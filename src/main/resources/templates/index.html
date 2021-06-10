@@ -1,19 +1,43 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">	<!--  Enlazamos Bootstrap -->
 
 <meta charset="ISO-8859-1">
 <title>Página Principal CuantosDescuentos</title>
 </head>
 
-<body align="center">
-	<h1>P&aacute;gina Principal CuantosDescuentos</h1>
-	<br><br>
-	<a th:href="@{/clientes/verClientes}"> Ver Clientes </a>
-	<br><br>
-	<a th:href="@{/clientes/nuevoCliente}"> Nuevo Cliente </a>
-	<br><br><br>
-	<a th:href="@{/empresas/verEmpresas}"> Ver Empresas </a>
-	<br><br>
-	<a th:href="@{/empresas/nuevaEmpresa}"> Nueva Empresa </a>
+
+
+<body>
+	<div class="container-fluid">
+  		<div class="row">
+  		<div class="col">
+			<!--  <nav class="navbar fixed-top navbar-dark bg-primary">
+			  <a class="navbar-brand" href="#!">P&aacute;gina Principal CuantosDescuentos</a>
+			</nav>-->
+			
+				<div class="jumbotron jumbotron-fluid">
+		 		<div class="container">
+				    <h1 class="display-3">CuantosDescuentos</h1>
+				    <p class="lead">Ofertas y descuentos de todo y para todos</p>
+				  </div>
+				</div>
+		
+		</div>
+		</div>
+
+		<div class="row">
+		<div class="col" align="center">
+			<a th:href="@{/clientes/verClientes}"> Ver Clientes </a>
+			<br><br>
+			<a th:href="@{/clientes/nuevoCliente}"> Nuevo Cliente </a>
+			<br><br><br>
+			<a th:href="@{/empresas/verEmpresas}"> Ver Empresas </a>
+			<br><br>
+			<a th:href="@{/empresas/nuevaEmpresa}"> Nueva Empresa </a>
+		</div>
+		</div>
+	</div>	
 </body>

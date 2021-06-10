@@ -1,15 +1,23 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
 <meta charset="ISO-8859-1">
 <title>Listado de clientes</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">	<!--  Enlazamos Bootstrap -->
 </head>
 <body>
+	<div align="right">
+		<form th:action="@{/logout}" method="post">
+    		<input type="submit" value="Logout" />
+		</form>
+	</div>
+	
+	<div>
 	<h1 align="center">Listado de empresas</h1>
 	<br>
 	
-	<table style="width:50%" align="center">
+	<table style="width:50%" align="center" class="table table-sm">
 		<thead>
 			<tr>
 				<th>ID-Empresa</th>
@@ -39,6 +47,6 @@
 			</td>
 		</tbody>
 	</table>	
-
+	</div>
 </body>
 </html>

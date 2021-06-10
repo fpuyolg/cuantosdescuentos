@@ -1,41 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Nuevo Cliente</title>
+	<meta charset="ISO-8859-1">
+	<title>Nuevo Cliente</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  <!--  Enlazamos Bootstrap -->
 </head>
 
-<body align="center">
+
+<body>
+	<div class="container">
+	<div class="row justify-content-center">
 	<h1>Nuevo Cliente</h1>
-	<br>					
+	</div>	
 	<form action="#" th:action="@{/clientes/grabarCliente}" method="POST">	  
-		
 		<div th:object="${nUsuario}">
-			<input type="text" th:field="*{nombre_usuario}" placeholder="Nombre de Usuario">
-				<small th:if="${#fields.hasErrors('nombre_usuario')}" th:errors="*{nombre_usuario}"></small><br>
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="nombre_usuario">Usuario: </label>
+			</div>
+			<div class="col-4">
+				<input type="text" class="form-control" th:field="*{nombre_usuario}" placeholder="Usuario" id="nombre_usuario">
+					<small th:if="${#fields.hasErrors('nombre_usuario')}" th:errors="*{nombre_usuario}"></small><br>
+			</div>
+			</div>
 			
-			<input type="text" th:field="*{clave}" placeholder="Clave">
-				<small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small><br>
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="clave">Clave: </label>
+			</div>
+			<div class="col-4">
+				<input type="text" class="form-control" th:field="*{clave}" placeholder="Clave" id="clave">
+					<small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small><br>
+			</div>
+			</div>
+		
 		</div>
 		
-		<div th:object="${nCliente}">
-		
+		<div class="form-group" th:object="${nCliente}">
+			
 			<input type="hidden" th:field="*{id_cliente}"/>		<!-- Añadimos un campo oculto con la id del empleado para las actualizaciones -->
-		
-			<input type="text" th:field="*{dni}" placeholder="DNI">
+
+			<div class="row justify-content-center">
+			<div class="col-1">			
+			<label for="dni">DNI: </label> 
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{dni}" placeholder="DNI" id="dni">
 				<small th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small><br>
-	
-			<input type="text" th:field="*{nombre}" placeholder="Nombre">
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="nombre">Nombre: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" id="nombre">
 				<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
-				
-			<input type="text" th:field="*{telefono}" placeholder="Teléfono">
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="telefono">Tel&eacute;fono: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{telefono}" placeholder="Tel&eacute;fono" id="telefono">
 				<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
-				
-			<input type="text" th:field="*{email}" placeholder="Email"><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="email">Email: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{email}" placeholder="Email" id="email"><br>
 				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-5">
+				<button type="submit" class="btn btn-info btn-block">Guardar</button>
+			</div>
+		</div>
 		</div>
 		
-		<button type="submit">Guardar</button>
+		
 	</form>
+	</div>
 </body>
 </html>

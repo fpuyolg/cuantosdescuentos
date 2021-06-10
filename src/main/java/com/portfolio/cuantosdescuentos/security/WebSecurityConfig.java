@@ -38,29 +38,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		// Para gestionar la autenticación
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-			System.out.println(">>>>>> Pasamos por método configure (AuthenticationManagerBuilder)");
 			auth.authenticationProvider(authenticationProvider());
 		}
 		
 		// Para gestionar la autorización
-	
 		@Override
 		protected void configure(final HttpSecurity http) throws Exception{
 
 			try {
 				http
 		        .authorizeRequests()
-	            .antMatchers("/").permitAll()
-	            .antMatchers("/clientes/verClientes").hasAuthority("CLIENTE")
-	            .antMatchers("/empresas/verEmpresas").hasAuthority("EMPRESA")
-
+		            .antMatchers("/").permitAll()
+		            .antMatchers("/clientes/verClientes").hasAuthority("CLIENTE")
+		            .antMatchers("/empresas/verEmpresas").hasAuthority("EMPRESA")
 	            .and()
-	            .formLogin().permitAll()
+	            	.formLogin().permitAll() 
 	            .and()
-	            .logout().permitAll()
-	            .and()
-	            .exceptionHandling().accessDeniedPage("/403")
-	            ; 
+		            .logout()
+		            .logoutSuccessUrl("/");
 				
 			}catch(Exception e) {
 				System.out.println(" >>>>>>>>> Error en comprobación de seguridad " + e.getStackTrace());
