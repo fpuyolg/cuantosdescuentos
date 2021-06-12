@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.portfolio.cuantosdescuentos.dao.UsuarioRepository;
 import com.portfolio.cuantosdescuentos.entity.Usuario;
-import com.portfolio.cuantosdescuentos.entity.UsuarioDetails;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	UsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

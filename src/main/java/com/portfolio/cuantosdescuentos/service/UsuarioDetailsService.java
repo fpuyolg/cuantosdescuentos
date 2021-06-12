@@ -1,4 +1,4 @@
-package com.portfolio.cuantosdescuentos.security;
+package com.portfolio.cuantosdescuentos.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

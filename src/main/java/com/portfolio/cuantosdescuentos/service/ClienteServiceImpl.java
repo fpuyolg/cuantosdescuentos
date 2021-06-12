@@ -26,4 +26,11 @@ public class ClienteServiceImpl implements ClienteService {
 	public void save(Cliente nuevoCliente) {
 		clienteRepository.save(nuevoCliente);
 	}
+
+	public Cliente findByDni(String dni) {
+		Cliente clienteLogado = clienteRepository.findByDni(dni);
+		return clienteLogado;
+	}
+
+
 }

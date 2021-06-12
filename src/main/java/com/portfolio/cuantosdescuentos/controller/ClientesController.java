@@ -1,10 +1,9 @@
 package com.portfolio.cuantosdescuentos.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.portfolio.cuantosdescuentos.entity.Cliente;
 import com.portfolio.cuantosdescuentos.entity.Usuario;
 import com.portfolio.cuantosdescuentos.service.ClienteService;
+import com.portfolio.cuantosdescuentos.service.UsuarioDetails;
 import com.portfolio.cuantosdescuentos.service.UsuarioService;
 
 @Controller
@@ -42,10 +42,22 @@ public class ClientesController {
 		// ACCESO A AREA CLIENTE
 	
 	@GetMapping("/clientes/areaCliente")
-	public String areaCliente(Model theModel) {
-		//List<Cliente>listaClientes = clienteService.findAll();
-
-		//theModel.addAttribute("lista", listaClientes);
+	public String areaCliente(@AuthenticationPrincipal UsuarioDetails usuarioDetails, Model modelo) {
+				// con @AuthenticationPrincipal
+			
+			System.out.println("\n ------- Entramos en método areaCliente");
+			
+			// Recuperamos el ID del usuario logado para hacer la consulta en la tabla Clientes y mostrar los datos
+			// en el área de clientes
+			
+			String nombreUsuario = usuarioDetails.getUsername();
+			String idUsuario = usuarioDetails.getId();
+			System.out.println("\n USUARIO LOGADO DESDE EL CONTROLADOR: " + idUsuario + " / " + nombreUsuario);
+			
+			Cliente clienteLogado = clienteService.findByDni(idUsuario);
+			
+			System.out.println("\n CLIENTE LOGADO: " + clienteLogado.getDni() + " / "+ clienteLogado.getNombre());
+		
 		return "clientes/area-cliente";
 	}
 	

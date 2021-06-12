@@ -7,5 +7,6 @@ public interface ClienteService {
 			
 	public List<Cliente> findAll();
 	public void save(Cliente nCliente);
+	public Cliente findByDni(String dni);
 
 }
