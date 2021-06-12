@@ -39,6 +39,18 @@ public class ClientesController {
 		return "index";
 	}
 	
+		// ACCESO A AREA CLIENTE
+	
+	@GetMapping("/clientes/areaCliente")
+	public String areaCliente(Model theModel) {
+		//List<Cliente>listaClientes = clienteService.findAll();
+
+		//theModel.addAttribute("lista", listaClientes);
+		return "clientes/area-cliente";
+	}
+	
+		// VER TABLA CON TODOS LOS CLIENTES
+	
 	@GetMapping("/clientes/verClientes")
 	public String verClientes(Model theModel) {
 		List<Cliente>listaClientes = clienteService.findAll();
@@ -47,7 +59,7 @@ public class ClientesController {
 		return "clientes/ver-clientes";
 	}
 
-	// ALTA DE CLIENTE. SE GRABAN DATOS EN TABLA CLIENTES Y TABLA USUARIOS
+		// ALTA DE CLIENTE. SE GRABAN DATOS EN TABLA CLIENTES Y TABLA USUARIOS
 	
 	@GetMapping("/clientes/nuevoCliente")
 	public String nuevoCliente(Model modeloCliente, Model modeloUsuario) {	// Añadir un segundo modelo para guardar datos en la tabla usuario
