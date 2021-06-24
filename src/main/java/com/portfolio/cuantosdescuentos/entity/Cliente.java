@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
-//import javax.validation.constraints.Pattern;
+
 
 @Entity
 @Table(name="clientes")

@@ -3,7 +3,7 @@
 				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Nuevo Cliente</title>
+	<title>Area Cliente</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  <!--  Enlazamos Bootstrap -->
 </head>
@@ -11,14 +11,73 @@
 
 <body>
 	<div class="container">
-		<div class="row justify-content-center">
-		<div class="col-4">
-			<span sec:authentication="name">Username</span>
+		<div  class="row">
+		<div class="col-2" align="center">Datos Cliente</div>
 		</div>
-		<div class="col-4">
-			Mostrar Tickets
+		<div class="row col-4">
+			<table class="table table-sm table-borderless">
+				<tr><td>DNI</td><td th:text="${clienteLogado.dni}" /></tr>
+				<tr><td>Nombre</td><td th:text="${clienteLogado.nombre}" /></tr>
+				<tr><td>Tel&eacute;fono</td><td th:text="${clienteLogado.telefono}" /></tr>
+				<tr><td>Email</td><td th:text="${clienteLogado.email}" /></tr>
+				<tr><td>Falta botón para editar datos</td></tr>
+			</table>	
 		</div>
+
+	<div class="row">
+		<div class="col">
+			Tickets pendientes
+
+			<table>
+		<thead>
+			<tr>
+				<th>ID-Cliente</th>
+				<th>ID-Oferta</th>
+				<th>Usado</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempHistoCli : ${historicoCliente}" th:unless="${tempHistoCli.usado}">  <!-- Si usado = false (ticket pendiente) -->
+			  	<td th:text="${tempHistoCli.id_cliente}" />
+				<td th:text="${tempHistoCli.id_oferta}" />
+				<td th:text="${tempHistoCli.usado}" />
+			</tr>
+		</tbody>
+	</table>
+	
+	
 		</div>
+		<div class="col">
+			Tickets usados
+			<table> 
+		<thead>
+			<tr>
+				<th>ID-Cliente</th>
+				<th>ID-Oferta</th>
+				<th>Usado</th>
+				<th>Fecha</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempHistoCli : ${historicoCliente}" th:if="${tempHistoCli.usado}">  <!-- Si usado es true -> ticket usado -->
+			  	<td th:text="${tempHistoCli.id_cliente}" />
+				<td th:text="${tempHistoCli.id_oferta}" />
+				<td th:text="${tempHistoCli.usado}" />
+			 	<td th:text="${#temporals.format(tempHistoCli.fecha, 'dd-MMMM-yyyy', new java.util.Locale('es', 'ES'))}">	
+			 	<!-- Alternativa <p th:text="${#dates.format(date, 'dd.MM.yyyy')}"></p>     25.09.1979   -->
+		 		
+			</tr>
+		</tbody>
+	</table>
+		</div>
+		<div class="col">
+			Tercera columna
+		</div>
+	</div>  <!--  cierre del div class="row"> -->
+	<div class="row">
+		<tr><td colspan="5" align="center">
+		<a th:href="@{/}"> Principal </a>
 	</div>
+	</div>  <!-- cierre del container -->
 </body>
 </html>

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.portfolio.cuantosdescuentos.entity.Cliente;
+import com.portfolio.cuantosdescuentos.entity.HistoCli;
 import com.portfolio.cuantosdescuentos.entity.Usuario;
 import com.portfolio.cuantosdescuentos.service.ClienteService;
+import com.portfolio.cuantosdescuentos.service.HistoCliService;
 import com.portfolio.cuantosdescuentos.service.UsuarioDetails;
 import com.portfolio.cuantosdescuentos.service.UsuarioService;
 
@@ -27,11 +29,15 @@ public class ClientesController {
 	private UsuarioService usuarioService;
 	
 	@Autowired
+	private HistoCliService histoCliService;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;	// Para encriptar la clave de usuario antes de grabarla en la base de datos
 	
-	public ClientesController(ClienteService thisClienteService, UsuarioService thisUsuarioService) {
+	public ClientesController(ClienteService thisClienteService, UsuarioService thisUsuarioService, HistoCliService thisHistoCliService) {
 		clienteService=thisClienteService;
 		usuarioService=thisUsuarioService;
+		histoCliService=thisHistoCliService;
 	}
 	
 	@GetMapping("/")
@@ -42,22 +48,22 @@ public class ClientesController {
 		// ACCESO A AREA CLIENTE
 	
 	@GetMapping("/clientes/areaCliente")
-	public String areaCliente(@AuthenticationPrincipal UsuarioDetails usuarioDetails, Model modelo) {
-				// con @AuthenticationPrincipal
+	public String areaCliente(@AuthenticationPrincipal UsuarioDetails usuarioDetails, Model modeloAreaClientes, Model modeloHistoricoCliente) {
+				// con @AuthenticationPrincipal obtenemos los destalles del usuario activo, es decir, que acaba de logarse
 			
-			System.out.println("\n ------- Entramos en método areaCliente");
-			
-			// Recuperamos el ID del usuario logado para hacer la consulta en la tabla Clientes y mostrar los datos
-			// en el área de clientes
-			
-			String nombreUsuario = usuarioDetails.getUsername();
-			String idUsuario = usuarioDetails.getId();
-			System.out.println("\n USUARIO LOGADO DESDE EL CONTROLADOR: " + idUsuario + " / " + nombreUsuario);
-			
-			Cliente clienteLogado = clienteService.findByDni(idUsuario);
-			
-			System.out.println("\n CLIENTE LOGADO: " + clienteLogado.getDni() + " / "+ clienteLogado.getNombre());
+		// Obtenemos el ID del usuario logado (DNI), buscamos en la tabla Clientes por DNI y pasamos los datos al área clientes con modeloAreaClientes
 		
+		String idUsuario = usuarioDetails.getId();
+		
+		Cliente clienteLogado = clienteService.findByDni(idUsuario);
+			System.out.println("\n CLIENTE LOGADO: " + clienteLogado.getDni() + " / "+ clienteLogado.getNombre());
+		modeloAreaClientes.addAttribute("clienteLogado", clienteLogado);
+		
+		// Recuperamos los tickets del cliente (usados o no) de la tabla histocli con el id_cliente (DNI)
+		System.out.println("\n Buscamos los tickets del cliente en HistoCli");
+		List<HistoCli> historicoUsuario = histoCliService.findById_cliente(clienteLogado.getId_cliente());
+		modeloHistoricoCliente.addAttribute("historicoCliente", historicoUsuario);
+			
 		return "clientes/area-cliente";
 	}
 	
@@ -86,7 +92,7 @@ public class ClientesController {
 	}
 
 	
-	@PostMapping("/clientes/grabarCliente")		// Añadir un segundo ModelAttribute para grabar los datos de la tabla usuario
+	@PostMapping("/clientes/grabarCliente")		// Usamos 2 ModelAttribute, uno para grabar los datos en tabla Clientes y otro para la tabla Usuarios
 	public String grabarCliente(@Valid @ModelAttribute("nCliente") Cliente nCliente, BindingResult clienteBR, 
 								@Valid @ModelAttribute("nUsuario") Usuario nUsuario, BindingResult usuarioBR) {
 		

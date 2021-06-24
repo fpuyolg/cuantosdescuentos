@@ -5,8 +5,8 @@ import com.portfolio.cuantosdescuentos.entity.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
-	Cliente findByDni(String dni);
+	// No tenemos que implementar la interface ya que JPA nos provee de los métodos necesarios. Sólo hay que añadir aquellos que sean personalizados
 	
-	// No tenemos que implementar la interface ya que JPA nos provee de los métodos necesarios
+	Cliente findByDni(String dni);
 	
 }
