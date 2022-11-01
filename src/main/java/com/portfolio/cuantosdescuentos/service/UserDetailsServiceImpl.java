@@ -19,13 +19,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
 		System.out.println(">>>>>>>>>>>>>>  Entramos en getUserByUsername");
-		Usuario usuarioLogado = usuarioRepository.getUserByUsername(userName);
+		Usuario usuarioLogado;
 		
-		System.out.println(">>>>>>>>>>>>>>  usuarioLogado= '" + usuarioLogado.getNombre_usuario() + "' clave: '" + usuarioLogado.getClave()
+		try {
+			usuarioLogado = usuarioRepository.getUserByUsername(userName);
+			System.out.println(">>>>>>>>>>>>>>  usuarioLogado= '" + usuarioLogado.getNombre_usuario() + "' clave: '" + usuarioLogado.getClave()
 											+ "' Rol: '" + usuarioLogado.getRol() + "'");
-		if(usuarioLogado == null){
+		}catch (Exception e){
 			throw new UsernameNotFoundException("Usuario no encontrado");
 		}
+		
 		return new UsuarioDetails(usuarioLogado);
 	}
 

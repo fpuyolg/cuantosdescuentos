@@ -9,12 +9,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
 import com.portfolio.cuantosdescuentos.service.UserDetailsServiceImpl;
 
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig{ // extends WebSecurityConfigurerAdapter{
 	
 		@Bean
 		public UserDetailsService userDetailsService() {
@@ -35,23 +37,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	        return authProvider;
 	    }
 		
-		// Para gestionar la autenticación
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-			auth.authenticationProvider(authenticationProvider());
-		}
+//		Para gestionar la autenticación -- SE SUPRIME AL IMPLEMENTAR EL SIGUIENTE @BEAN (SecurityFilterChain)
+//		@Override
+//		protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+//			auth.authenticationProvider(authenticationProvider());
+//		}
 		
 		// Para gestionar la autorización
-		@Override
-		protected void configure(final HttpSecurity http) throws Exception{
+	//	@Override
+		//protected void configure(final HttpSecurity http) throws Exception{
 
+			@Bean
+			public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			try {
 				http
-		        .authorizeRequests()
-		            .antMatchers("/").permitAll()
+		        .authorizeRequests()				// El orden de las reglas es relevante (de más específicas a más generales)
 		            .antMatchers("/clientes/areaCliente").hasAuthority("CLIENTE")
 		            .antMatchers("/clientes/verClientes").hasAuthority("CLIENTE")
 		            .antMatchers("/empresas/verEmpresas").hasAuthority("EMPRESA")
+		            .antMatchers("/").permitAll()
 	            .and()
 	            	.formLogin().permitAll() 
 	            .and()
@@ -61,5 +65,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			}catch(Exception e) {
 				System.out.println(" >>>>>>>>> Error en comprobación de seguridad " + e.getStackTrace());
 			}
+			return http.build();
 		}
 }

@@ -52,17 +52,21 @@ public class ClientesController {
 				// con @AuthenticationPrincipal obtenemos los destalles del usuario activo, es decir, que acaba de logarse
 			
 		// Obtenemos el ID del usuario logado (DNI), buscamos en la tabla Clientes por DNI y pasamos los datos al área clientes con modeloAreaClientes
-		
 		String idUsuario = usuarioDetails.getId();
 		
+		try {
 		Cliente clienteLogado = clienteService.findByDni(idUsuario);
 			System.out.println("\n CLIENTE LOGADO: " + clienteLogado.getDni() + " / "+ clienteLogado.getNombre());
 		modeloAreaClientes.addAttribute("clienteLogado", clienteLogado);
 		
 		// Recuperamos los tickets del cliente (usados o no) de la tabla histocli con el id_cliente (DNI)
-		System.out.println("\n Buscamos los tickets del cliente en HistoCli");
+			System.out.println("\n Buscamos los tickets del cliente en HistoCli");
 		List<HistoCli> historicoUsuario = histoCliService.findById_cliente(clienteLogado.getId_cliente());
 		modeloHistoricoCliente.addAttribute("historicoCliente", historicoUsuario);
+		}catch(Exception e) {
+			System.out.println("Cliente no existe");
+		}
+		// Recorremos la lista de los tickets del usuario (historicoUsuario) para buscar el nombre de la oferta según el id_oferta
 			
 		return "clientes/area-cliente";
 	}
@@ -102,7 +106,8 @@ public class ClientesController {
 		
 		clienteService.save(nCliente);
 		
-		nUsuario.setId_usuario(nCliente.getDni());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=DNI y rol "CLIENTE"
+		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=DNI y rol "CLIENTE") y encriptamos la clave
+		nUsuario.setId_usuario(nCliente.getDni());
 		nUsuario.setRol("CLIENTE");
 		nUsuario.setClave(passwordEncoder.encode(nUsuario.getClave()));		// Encriptamos la clave con PasswordEncoder
 		
