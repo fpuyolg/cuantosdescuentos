@@ -26,7 +26,11 @@
 				<tr><td>Nombre</td><td th:text="${clienteLogado.nombre}" /></tr>
 				<tr><td>Tel&eacute;fono</td><td th:text="${clienteLogado.telefono}" /></tr>
 				<tr><td>Email</td><td th:text="${clienteLogado.email}" /></tr>
-				<tr><td>Falta botón para editar datos</td></tr>
+				<tr><td> <a th:href="@{/clientes/actualizaCliente(clienteId=${clienteLogado.dni})}"
+							class="btn btn-outline-primary btn-sm"> Actualizar datos </a></td>
+					<td> <a th:href="@{/clientes/actualizarClave(dniUsuario=${clienteLogado.dni})}"
+							class="btn btn-outline-primary btn-sm"> Cambiar clave </a></td>
+							</tr>
 			</table>	
 		</div>
 
@@ -38,14 +42,14 @@
 		<thead>
 			<tr>
 				<th>ID-Cliente</th>
-				<th>ID-Oferta</th>
+				<th>Oferta</th>
 				<th>Usado</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="tempHistoCli : ${historicoCliente}" th:unless="${tempHistoCli.usado}">  <!-- Si usado = false (ticket pendiente) -->
-			  	<td th:text="${tempHistoCli.id_cliente}" />
-				<td th:text="${tempHistoCli.id_oferta}" />
+			<tr th:each="tempHistoCli : ${historicoCliente}" th:unless="${tempHistoCli.usado}">
+				<td th:text="${tempHistoCli.id_cliente}" />
+				<td th:each="tempDatosOferta : ${datosOferta}" th:if="(${tempHistoCli.id_oferta} == ${tempDatosOferta.id_oferta})" th:text="${tempDatosOferta.titulo}" />  <!-- Si usado = false (ticket pendiente) -->
 				<td th:text="${tempHistoCli.usado}" />
 			</tr>
 		</tbody>
@@ -59,7 +63,7 @@
 		<thead>
 			<tr>
 				<th>ID-Cliente</th>
-				<th>ID-Oferta</th>
+				<th>Oferta</th>
 				<th>Usado</th>
 				<th>Fecha</th>
 			</tr>
@@ -67,7 +71,7 @@
 		<tbody>
 			<tr th:each="tempHistoCli : ${historicoCliente}" th:if="${tempHistoCli.usado}">  <!-- Si usado es true -> ticket usado -->
 			  	<td th:text="${tempHistoCli.id_cliente}" />
-				<td th:text="${tempHistoCli.id_oferta}" />
+				<td th:each="tempDatosOferta : ${datosOferta}" th:if="(${tempHistoCli.id_oferta} == ${tempDatosOferta.id_oferta})" th:text="${tempDatosOferta.titulo}" />  <!-- Si usado = false (ticket pendiente) -->
 				<td th:text="${tempHistoCli.usado}" />
 			 	<td th:text="${#temporals.format(tempHistoCli.fecha, 'dd-MMMM-yyyy', new java.util.Locale('es', 'ES'))}">	
 			 	<!-- Alternativa <p th:text="${#dates.format(date, 'dd.MM.yyyy')}"></p>     25.09.1979   -->
