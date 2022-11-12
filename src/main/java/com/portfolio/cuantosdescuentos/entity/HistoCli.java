@@ -12,7 +12,6 @@ import com.portfolio.cuantosdescuentos.HistoCliPK;
 public class HistoCli {
 	
 	@Id int id_cliente;
-	
 	// @Column(name="id_cliente")
 	// private int id_cliente;
 	

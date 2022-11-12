@@ -34,7 +34,11 @@ public class UsuarioDetails implements UserDetails{
 	}
 	
 	public String getId() {
-		return usuario.getId_usuario();	// Añadimos getter para obtener la clave en el acceso al área de clientes
+		return usuario.getIdUsuario();	// Añadimos getter para obtener la clave en el acceso al área de clientes
+	}
+	
+	public void setId(String nuevoDNI) {
+		this.usuario.setIdUsuario(nuevoDNI);
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class EmpresasController {
 		
 		empresaService.save(nEmpresa);
 		
-		nUsuario.setId_usuario(nEmpresa.getCif());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=CIF y Rol="EMPRESA")
+		nUsuario.setIdUsuario(nEmpresa.getCif());		// Añadimos al ModelAttribute nUsuario los dos datos que faltan (id_usuario=CIF y Rol="EMPRESA")
 		nUsuario.setRol("EMPRESA");
 		nUsuario.setClave(passwordEncoder.encode(nUsuario.getClave()));
 		

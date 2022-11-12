@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Datos del Cliente</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  <!--  Enlazamos Bootstrap -->
+</head>
+
+
+<body>
+	<div class="container">
+	<div class="row justify-content-center">
+	<h1>Datos Personales</h1>
+	</div>	
+	<form action="#" th:action="@{/clientes/GrabarNuevaClave}" th:object="${datosActualizaClave}" method="POST">	  
+		
+<!-- 		<div class="form-group" th:object="${datosNuevaClave}"> -->
+			<div class="form-group">
+			<input type="hidden" th:field="*{dni}"/>		<!-- Añadimos un campo oculto con el DNI del usuario que va a cambiar la clave -->
+
+			<div class="row justify-content-center">
+			<div class="col-1">			
+			<label for="dni">Clave actual: </label> 
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{claveActual}" placeholder="Clave Actual" id="claveActual">
+				<small th:if="${#fields.hasErrors('claveActual')}" th:errors="*{clave}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="nombre">Nueva clave: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{nuevaClave}" placeholder="Nueva Clave" id="nuevaClave">
+				<small th:if="${#fields.hasErrors('nuevaClave')}" th:errors="*{nuevaClave}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="telefono">Repita la nueva clave: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{nuevaClaveRep}" placeholder="Repita la Nueva Clave" id="nuevaClaveRep">
+				<small th:if="${#fields.hasErrors('nuevaClaveRep')}" th:errors="*{nuevaClaveRep}"></small><br>
+			</div>
+			</div>
+					
+			<div class="row justify-content-center">
+			<div class="col-5">
+				<button type="submit" class="btn btn-info btn-block">Guardar</button>
+			</div>
+		</div>
+		</div>
+		
+		
+	</form>
+	</div>
+</body>
+</html>

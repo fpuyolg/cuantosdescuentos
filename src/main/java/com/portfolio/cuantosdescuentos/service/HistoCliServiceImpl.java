@@ -17,18 +17,14 @@ public class HistoCliServiceImpl implements HistoCliService {
 		histoCliRepository=thisHistoCliRepository;
 	}
 
+	//@Override
+	//public List<HistoCli> findById_cliente(int id_cliente) {  // Versión del histórico con el código del ticket en lugar del título
+
+
 	@Override
-	public List<HistoCli> findById_cliente(int id_cliente) {
-		List<HistoCli> listaHistoCli = histoCliRepository.findById_cliente(id_cliente);
+	public List<Object[]> findById_cliente(int id_cliente) {
+		List<Object[]> listaHistoCli = histoCliRepository.findById_cliente(id_cliente);
 		return listaHistoCli;
 	}
-
-//	@Override
-//	public List<HistoricoCliente> findById_Oferta(int id_cliente) {
-//		List<HistoricoCliente> historicoCliente=histoCliRepository.findById_oferta(id_cliente);
-//		return historicoCliente;
-//	}
-	
-	
 
 }
