@@ -1,48 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Nueva Empresa</title>
+	<meta charset="UTF-8">
+	<title>Nueva Empresa</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  <!--  Enlazamos Bootstrap -->
 </head>
-<body align="center">
-	<h1>Nueva Empresa</h1>
-	<br>
+
+<body>
+	<div class="container">
+	<div class="row justify-content-center">
+		<h1>Nueva Empresa</h1>
+	</div>
 	<form action="#" th:action="@{/empresas/grabarEmpresa}" method="POST">
-
 		<div th:object="${nUsuario}">
-			<input type="text" th:field="*{nombre_usuario}" placeholder="Nombre de Usuario">
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="nombre_usuario">Usuario: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{nombre_usuario}" placeholder="Nombre de Usuario">
 				<small th:if="${#fields.hasErrors('nombre_usuario')}" th:errors="*{nombre_usuario}"></small><br>
+			</div>
+			</div>
 			
-			<input type="text" th:field="*{clave}" placeholder="Clave">
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="clave">Clave: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{clave}" placeholder="Clave">
 				<small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small><br>
-		</div>
-
-		<div th:object="${nEmpresa}">
-			<input type="hidden" th:field="*{id_empresa}"/><br>
-			
-			<input type="text" th:field="*{cif}" placeholder="CIF"/>
-				<small th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"></small><br>
-			
-			<input type="text" th:field="*{nombre}" placeholder="Nombre Empresa"/>
-				<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
-			
-			<input type="text" th:field="*{telefono}" placeholder="Telefono"/>
-				<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
-			
-			<input type="text" th:field="*{email}" placeholder="Email"/>
-				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
-			
-			<input type="text" th:field="*{direccion}" placeholder="Direcci�n"/>
-				<small th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small><br>
-			
-			<input type="text" th:field="*{cp}" placeholder="C.P."/>
-				<small th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></small><br>
-			
-			<input type="text" th:field="*{localidad}" placeholder="Localidad"/>
-				<small th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}"></small><br><br>
+			</div>
+			</div>
 		</div>
 		
-		<button type="submit">Grabar</button>
+		<div class="form-group" th:object="${nEmpresa}">
+			
+			<input type="hidden" th:field="*{id_empresa}"/><br>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">			
+			<label for="dni">CIF: </label> 
+			</div>
+			<div class="col-4">			
+			<input type="text" class="form-control" th:field="*{cif}" placeholder="CIF"/>
+				<small th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"></small><br>
+			</div>
+			</div>
+
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="nombre">Nombre: </label>
+			</div>
+			<div class="col-4">			
+			<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre Empresa"/>
+				<small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small><br>
+			</div>
+			</div>
+
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="telefono">Teléfono: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{telefono}" placeholder="Telefono"/>
+				<small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="email">Email: </label>
+			</div>
+			<div class="col-4">			
+			<input type="text" class="form-control" th:field="*{email}" placeholder="Email"/>
+				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="email">Dirección: </label>
+			</div>
+			<div class="col-4">				
+			<input type="text" class="form-control" th:field="*{direccion}" placeholder="Dirección"/>
+				<small th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small><br>
+			</div>
+			</div>
+					
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="email">C.P.: </label>
+			</div>
+			<div class="col-4">	
+			<input type="text" class="form-control" th:field="*{cp}" placeholder="C.P."/>
+				<small th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></small><br>
+			</div>
+			</div>
+						
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="email">Email: </label>
+			</div>
+			<div class="col-4">	
+			<input type="text" class="form-control" th:field="*{localidad}" placeholder="Localidad"/>
+				<small th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}"></small><br><br>
+			</div>
+			</div>
+					
+			<div class="row justify-content-center">
+			<div class="col-5">
+				<button type="submit" class="btn btn-info btn-block">Guardar</button>
+			</div>
+			</div>
+		</div>		
 	</form>
+</div>
 </body>
 </html>

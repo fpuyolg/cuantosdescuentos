@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.portfolio.cuantosdescuentos.CuantosdescuentosApplication;
@@ -55,6 +56,11 @@ public class ClientesController {
 	@GetMapping("/")
 	public String principal() {
 		return "index";
+	}
+	
+	@RequestMapping("/403")
+	public String accessDenied() {
+	    return "errores/403";
 	}
 	
 		// ACCESO A AREA CLIENTE

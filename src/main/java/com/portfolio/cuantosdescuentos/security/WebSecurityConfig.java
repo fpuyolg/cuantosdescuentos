@@ -55,12 +55,17 @@ public class WebSecurityConfig{ // extends WebSecurityConfigurerAdapter{
 		            .antMatchers("/clientes/areaCliente").hasAuthority("CLIENTE")
 		            .antMatchers("/clientes/verClientes").hasAuthority("CLIENTE")
 		            .antMatchers("/empresas/verEmpresas").hasAuthority("EMPRESA")
+		            .antMatchers("/css/**").permitAll()
+		            .antMatchers("/403").permitAll()
 		            .antMatchers("/").permitAll()
 	            .and()
-	            	.formLogin().permitAll() 
+	            	.formLogin().permitAll()
+	            	.and()
+	            	.exceptionHandling().accessDeniedPage("/403")
 	            .and()
 		            .logout()
 		            .logoutSuccessUrl("/");
+	            
 				
 			}catch(Exception e) {
 				System.out.println(" >>>>>>>>> Error en comprobación de seguridad " + e.getStackTrace());
