@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Nueva Oferta</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  <!--  Enlazamos Bootstrap -->
+</head>
+
+<body>
+	<div class="container">
+	<div class="row justify-content-center">
+		<h1>Nueva Oferta</h1>
+	</div>
+	<form action="#" th:action="@{/empresas/grabarOferta}" method="POST">
+		<div th:object="${nOferta}">
+		
+			<input type="hidden" th:field="*{id_oferta}"/><br> <!-- Campo oculto para utilizarlo en las actualizaciones -->
+		
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="titulo">Título: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{titulo}" placeholder="Título">
+				<small th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="clave">Descripción: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{descripcion}" placeholder="Descripción">
+				<small th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small><br>
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">
+				<label for="clave">Seleccione imagen: </label>
+			</div>
+			<div class="col-4">
+			<input type="file" class="form-control" th:field="*{imagen}" placeholder="Descripción">
+			</div>
+			</div>
+			
+			<div class="row justify-content-center">
+			<div class="col-1">			
+			<label for="dni">Categoría: </label> 
+			</div>
+			<div class="col-4">			
+			<input type="text" class="form-control" th:field="*{id_categoria}" placeholder="CIF"/>  PENDIENTE ACTUALIZAR A LISTA DESPLEGABLE
+				<small th:if="${#fields.hasErrors('id_categoria')}" th:errors="*{id_categoria}"></small><br>
+			</div>
+			</div>
+
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="nombre">Desde: </label>
+			</div>
+			<div class="col-4">			
+			<input type="text" class="form-control" th:field="*{fecha_desde}" placeholder="Nombre Empresa"/>  	PENDIENTE ACTUALIZAR A SELECTOR CALENDARIO FECHA
+				<small th:if="${#fields.hasErrors('fecha_desde')}" th:errors="*{fecha_desde}"></small><br>
+			</div>
+			</div>
+
+			<div class="row justify-content-center">
+			<div class="col-1">
+			<label for="telefono">Hasta: </label>
+			</div>
+			<div class="col-4">
+			<input type="text" class="form-control" th:field="*{fecha_hasta}" placeholder="Telefono"/>  	PENDIENTE ACTUALIZAR A SELECTOR CALENDARIO FECHA
+				<small th:if="${#fields.hasErrors('fecha_hasta')}" th:errors="*{fecha_hasta}"></small><br>
+			</div>
+			</div>
+					
+			<div class="row justify-content-center">
+			<div class="col-5">
+				<button type="submit" class="btn btn-info btn-block">Guardar</button>
+			</div>
+			</div>
+		</div>		
+	</form>
+</div>
+</body>
+</html>

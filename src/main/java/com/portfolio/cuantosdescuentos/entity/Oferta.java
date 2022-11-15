@@ -34,9 +34,12 @@ public class Oferta {
 	@Column(name="descripcion")
 	private String descripcion;
 	
+	@Column(name="imagen")
+	private byte[] imagen;
+			
 	//@Pattern(regexp=".+@.+\\..+", message="Email incorrecto")
 	@Column(name="id_categoria")
-	private String id_categoria;
+	private String idCategoria;
 	
 	@Column(name="fecha_desde")
 	private LocalDate fecha_desde;
@@ -57,7 +60,7 @@ public class Oferta {
 		this.id_empresa = id_empresa;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.id_categoria = id_categoria;
+		this.idCategoria = id_categoria;
 		this.fecha_desde = fecha_desde;
 		this.fecha_hasta = fecha_hasta;
 		this.precio = precio;
@@ -88,11 +91,11 @@ public class Oferta {
 	}
 
 	public String getId_categoria() {
-		return id_categoria;
+		return idCategoria;
 	}
 
 	public void setId_categoria(String id_categoria) {
-		this.id_categoria = id_categoria;
+		this.idCategoria = id_categoria;
 	}
 
 	public LocalDate getFecha_desde() {
@@ -123,10 +126,26 @@ public class Oferta {
 		return id_oferta;
 	}
 
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(String idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
 	@Override
 	public String toString() {
 		return "Oferta [id_oferta=" + id_oferta + ", id_empresa=" + id_empresa + ", titulo=" + titulo + ", descripcion="
-				+ descripcion + ", id_categoria=" + id_categoria + ", fecha_desde=" + fecha_desde + ", fecha_hasta="
+				+ descripcion + ", id_categoria=" + idCategoria + ", fecha_desde=" + fecha_desde + ", fecha_hasta="
 				+ fecha_hasta + ", precio=" + precio + "]";
 	}
 	

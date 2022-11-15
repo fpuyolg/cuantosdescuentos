@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.portfolio.cuantosdescuentos.dao.EmpresaRepository;
 import com.portfolio.cuantosdescuentos.entity.Empresa;
 
@@ -28,6 +27,11 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public void save(Empresa nEmpresa) {
 		empresaRepository.save(nEmpresa);
 		
+	}
+
+	@Override
+	public Empresa findByCif(String cif) {
+		return empresaRepository.findByCif(cif);
 	}
 
 }

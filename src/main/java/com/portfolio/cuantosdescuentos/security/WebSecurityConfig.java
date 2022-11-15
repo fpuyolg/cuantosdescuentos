@@ -55,6 +55,7 @@ public class WebSecurityConfig{ // extends WebSecurityConfigurerAdapter{
 		            .antMatchers("/clientes/areaCliente").hasAuthority("CLIENTE")
 		            .antMatchers("/clientes/verClientes").hasAuthority("CLIENTE")
 		            .antMatchers("/empresas/verEmpresas").hasAuthority("EMPRESA")
+		            .antMatchers("/ofertas/nuevaOferta").hasAuthority("EMPRESA")
 		            .antMatchers("/css/**").permitAll()
 		            .antMatchers("/403").permitAll()
 		            .antMatchers("/").permitAll()

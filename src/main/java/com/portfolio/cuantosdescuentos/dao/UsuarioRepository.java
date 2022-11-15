@@ -2,10 +2,7 @@ package com.portfolio.cuantosdescuentos.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
-import com.portfolio.cuantosdescuentos.entity.Cliente;
 import com.portfolio.cuantosdescuentos.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, String>{

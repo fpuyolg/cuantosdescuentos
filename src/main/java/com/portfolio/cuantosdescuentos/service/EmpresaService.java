@@ -8,4 +8,6 @@ public interface EmpresaService {
 		public List<Empresa> findAll();
 		
 		public void save(Empresa nEmpresa);
+		
+		public Empresa findByCif(String cif);
 }
